@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: tomas-agentkit
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - image: LOCATION-docker.pkg.dev/YOUR_PROJECT_ID/REPO_NAME/tomas-agentkit
+          ports:
+            - containerPort: 3000

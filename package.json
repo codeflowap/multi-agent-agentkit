@@ -1,0 +1,25 @@
+{
+  "name": "tomas-sme-agentkit",
+  "version": "1.0.0",
+  "description": "Tomas SME Agents prototype using AgentKit (Inngest)",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "test": "jest"
+  },
+  "type": "module",
+  "dependencies": {
+    "@inngest/agent-kit": "^0.5.0",
+    "dotenv": "^16.5.0",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "tsx": "^4.6.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}
