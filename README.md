@@ -1,10 +1,10 @@
-Tomas SME AgentKit Prototype
+SunCore SME AgentKit Prototype
 This project is a minimal yet complete prototype demonstrating a collaborative AI agent system built using AgentKit (by Inngest). It showcases how specialized Subject Matter Expert (SME) agents can work together in a shared network, utilizing deterministic routing and stateful tooling to automate complex business requests.
 
-🎯 Prototype Goal
-Our primary objective was to simulate Tomas AI's capability to dynamically integrate SME-level assistants for domain-specific tasks. The core use case for this prototype is generating marketing campaign ideas based on customer sentiment (NPS) and product growth data.
+ Prototype Goal
+Our primary objective was to simulate SunCore AI's capability to dynamically integrate SME-level assistants for domain-specific tasks. The core use case for this prototype is generating marketing campaign ideas based on customer sentiment (NPS) and product growth data.
 
-✨ Features
+ Features
 Collaborative AI Agents: Support SME and Marketing SME agents work together.
 Stateful Memory: Agents share and update context (NPS insights, product trends) across turns using the network's state.
 Deterministic Routing: A custom router controls the flow of execution between agents for predictable workflows.
@@ -15,10 +15,10 @@ Inngest Integration: Leverages Inngest for robust orchestration, local developme
 src/
 ├── agents/              # Defines our SME agents (MarketingSME, SupportSME)
 ├── tools/               # Reusable tools called by agents (getNPSInsights, getProductInsights, saveCampaignIdeas)
-├── router/              # Contains the deterministic routing logic (tomasRouter)
-├── network/             # Configures the AgentKit network (tomasNetwork)
-├── functions/           # Defines the main Inngest function that triggers the network (tomasFunction)
-├── types/               # Shared TypeScript types (TomasState)
+├── router/              # Contains the deterministic routing logic (sunCoreRouter)
+├── network/             # Configures the AgentKit network (sunCoreNetwork)
+├── functions/           # Defines the main Inngest function that triggers the network (sunCoreFunction)
+├── types/               # Shared TypeScript types (SunCoreState)
 └── server.ts            # Entry point to run the HTTP server
 🚀 Getting Started
 
@@ -60,8 +60,8 @@ npm run start
 
 You should see output similar to this, indicating the server is running:
 
-✅ Registered function: tomas-sme-demo/run
-🚀 Tomas SME AgentKit running on http://localhost:3000
+✅ Registered function: sunCore-sme-demo/run
+🚀 SunCore SME AgentKit running on http://localhost:3000
 
 
 4. Start the Inngest Dev Server
@@ -78,7 +78,7 @@ Open the Inngest Dev Server dashboard in your browser (http://127.0.0.1:8288).
 
 Navigate to the "Functions" tab.
 
-Locate the function named "Tomas SME Demo Run" and click its "Invoke" button.
+Locate the function named "SunCore SME Demo Run" and click its "Invoke" button.
 
 In the "Invoke Function" modal, paste the following JSON payload:
 
@@ -111,13 +111,13 @@ save_campaign_ideas – Stores the final generated campaign ideas as a JSON stri
 
 ⚙️ Key Concepts Implemented
 Agent Collaboration
-Our tomasRouter orchestrates the Support SME and Marketing SME agents. The Support SME runs first to provide npsSummary, then the Marketing SME takes over to generate campaigns, demonstrating agents working in concert.
+Our sunCoreRouter orchestrates the Support SME and Marketing SME agents. The Support SME runs first to provide npsSummary, then the Marketing SME takes over to generate campaigns, demonstrating agents working in concert.
 
 Stateful Tooling & Shared Memory
 Agents and tools interact with network.state.kv to share data across the workflow. get_nps_insights and get_product_insights write their respective summaries/lists to this state, which Marketing SME then reads to formulate its campaigns. The save_campaign_ideas tool then stores the final output back into this state.
 
 Deterministic Routing
-The tomasRouter ensures a predictable flow (Support SME -> Marketing SME -> End), making the AI workflow reliable and easily debuggable. It uses the presence of data in the shared state to decide the next step.
+The sunCoreRouter ensures a predictable flow (Support SME -> Marketing SME -> End), making the AI workflow reliable and easily debuggable. It uses the presence of data in the shared state to decide the next step.
 
 Inngest Integration
 Leveraging inngest-cli and the Inngest Dev Server provides a powerful local development experience with live tracing, step-by-step visibility of agent inputs/outputs, and automatic retries.
@@ -137,15 +137,15 @@ TypeError: Cannot read properties of undefined (related to npsSummary, topProduc
 
 This typically means network.state.data was undefined or npsSummary/topProducts were not yet set in network.state.kv.
 
-Verify src/network/tomasNetwork.ts initializes defaultState: new State<TomasState>({}).
+Verify src/network/sunCoreNetwork.ts initializes defaultState: new State<SunCoreState>({}).
 
 Confirm your tools (getNPSInsights.ts, getProductInsights.ts) are correctly using (network.state as any).kv.set("key", value) to save data.
 
-Ensure your agents (marketingSME.ts) and router (tomasRouter.ts) are correctly reading data using (network.state as any).kv.get("key").
+Ensure your agents (marketingSME.ts) and router (sunCoreRouter.ts) are correctly reading data using (network.state as any).kv.get("key").
 
 TypeError: network.state.kv.entries is not a function:
 
-This is a debug logging issue, not a core functional one. It happens if network.state.kv is a plain object, not a Map. The provided src/router/tomasRouter.ts should already have the fix to correctly JSON.stringify a plain object.
+This is a debug logging issue, not a core functional one. It happens if network.state.kv is a plain object, not a Map. The provided src/router/sunCoreRouter.ts should already have the fix to correctly JSON.stringify a plain object.
 
 ⚠️ We detected that you have multiple steps with the same ID. ... Code: AUTOMATIC_PARALLEL_INDEXING:
 

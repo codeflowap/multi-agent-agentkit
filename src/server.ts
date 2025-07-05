@@ -1,14 +1,14 @@
 import 'dotenv/config'; 
 import { createServer } from "@inngest/agent-kit/server";
-import { inngest, tomasFunction } from "./functions/tomasFunction.js";
+import { inngest, sunCoreFunction } from "./functions/sunCoreFunction.js";
 import { marketingFunction } from "./functions/marketingFunction.js";
 import { IncomingMessage, ServerResponse } from "http";
 
 const server = createServer({
-  functions: [tomasFunction, marketingFunction], // Register the function triggers
+  functions: [sunCoreFunction, marketingFunction], // Register the function triggers
 });
 
-console.log("✅ Registered function: tomas-sme-demo/run");
+console.log("✅ Registered function: sunCore-sme-demo/run");
 console.log("✅ Registered function: marketing-sme/run");
 
 const originalHandler = (server as any).handler;
@@ -21,7 +21,7 @@ const originalHandler = (server as any).handler;
   res: ServerResponse
 ) => {
   /**
-   * Handle POST requests to trigger the Tomas SME Demo function.
+   * Handle POST requests to trigger the SunCore SME Demo function.
    */
   if (req.method === "POST" && req.url === "/api/run") {
     let body = "";
@@ -31,7 +31,7 @@ const originalHandler = (server as any).handler;
         const parsedBody = body ? JSON.parse(body) : {};
         // Send the event to Inngest
         await inngest.send({
-          name: "tomas-sme-demo/run",
+          name: "sunCore-sme-demo/run",
           data: {
             input: parsedBody.input,
           },
@@ -100,5 +100,5 @@ const originalHandler = (server as any).handler;
 };
 
 server.listen(3000, () => {
-  console.log("🚀 Tomas SME AgentKit running on http://localhost:3000");
+  console.log("🚀 SunCore SME AgentKit running on http://localhost:3000");
 });

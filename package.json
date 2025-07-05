@@ -1,5 +1,5 @@
 {
-  "name": "tomas-sme-agentkit",
+  "name": "suncore-sme-agentkit",
   "version": "1.0.0",
   "description": "Tomas SME Agents prototype using AgentKit (Inngest)",
   "main": "src/server.ts",

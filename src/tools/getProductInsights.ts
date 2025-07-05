@@ -1,6 +1,6 @@
 import { createTool } from "@inngest/agent-kit";
 import { z } from "zod";
-import { TomasState } from "../types/state.js"; 
+import { SunCoreState } from "../types/state.js"; 
 
 /**
  * Tool to retrieve a mocked list of high-performing products.

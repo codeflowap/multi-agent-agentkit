@@ -3,12 +3,12 @@ import requests
 
 API_URL = "http://localhost:3000/api/inngest"
 
-def talk_to_tomas(user_input):
+def talk_to_sunCore(user_input):
     try:
         response = requests.post(
             API_URL,
             json={
-                "name": "tomas-sme-demo/default",  # <-- function trigger name
+                "name": "sunCore-sme-demo/default",  # <-- function trigger name
                 "data": { "input": user_input }
                 },
             timeout=20
@@ -21,15 +21,15 @@ def talk_to_tomas(user_input):
         return f"⚠️ Exception: {str(e)}"
 
 with gr.Blocks() as demo:
-    gr.Markdown(""" #Tomas SME Assistant
-Enter a business request (e.g. campaigns based on NPS or products) and see how Tomas SME agents respond.""")
+    gr.Markdown(""" #SunCore SME Assistant
+Enter a business request (e.g. campaigns based on NPS or products) and see how SunCore SME agents respond.""")
 
     with gr.Row():
         user_input = gr.Textbox(label="Your Input", placeholder="e.g. suggest July campaigns based on NPS")
     output = gr.Textbox(label="Response")
 
-    btn = gr.Button("Ask Tomas")
-    btn.click(fn=talk_to_tomas, inputs=user_input, outputs=output)
+    btn = gr.Button("Ask SunCore")
+    btn.click(fn=talk_to_sunCore, inputs=user_input, outputs=output)
 
 if __name__ == "__main__":
     demo.launch()

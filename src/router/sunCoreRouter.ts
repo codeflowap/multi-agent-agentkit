@@ -1,8 +1,8 @@
 import { supportSME } from "../agents/supportSME.js";
 import { marketingSME } from "../agents/marketingSME.js";
-import { TomasState } from "../types/state.js";
+import { SunCoreState } from "../types/state.js";
 
-export const tomasRouter = (params: {
+export const sunCoreRouter = (params: {
   input: string;
   network: any;
   callCount: number;

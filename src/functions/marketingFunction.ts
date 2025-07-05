@@ -1,4 +1,4 @@
-import { inngest } from "./tomasFunction.js";
+import { inngest } from "./sunCoreFunction.js";
 import { marketingNetwork } from "../network/marketingNetwork.js";
 
 export const marketingFunction = inngest.createFunction(

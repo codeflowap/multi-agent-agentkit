@@ -1,8 +1,8 @@
 /**
- * Shared state interface used across all Tomas SME agents.
+ * Shared state interface used across all SunCore SME agents.
  * This allows stateful interaction between the SME agents via the AgentKit network.
  */
-export interface TomasState {
+export interface SunCoreState {
   /** Summary extracted from NPS data */
   npsSummary?: string;
 

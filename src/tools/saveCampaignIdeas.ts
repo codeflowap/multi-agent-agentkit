@@ -1,7 +1,7 @@
 // src/tools/saveCampaignIdeas.ts
 import { createTool } from "@inngest/agent-kit";
 import { z } from "zod";
-import { TomasState } from "../types/state.js"; // Keep TomasState for type inference
+import { SunCoreState } from "../types/state.js"; // Keep SunCoreState for type inference
 
 /**
  * Tool for saving the final output of marketing campaign ideas.
